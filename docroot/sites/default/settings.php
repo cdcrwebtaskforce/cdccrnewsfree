@@ -777,3 +777,8 @@ if (isset($_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR']) && file_exists($_SERVER['D
   require $_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR'] . '/cld_devcloud_cdcrnewsfree_dev_default.inc';
 }
 // </DDSETTINGS>
+
+// Configuration directories.
+$dir = dirname(DRUPAL_ROOT);
+$config_directories['sync'] = $dir . "/config/sync";
+
