@@ -1,0 +1,17 @@
+uuid: 56d3227b-2b42-4535-9e14-567428bb887b
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Article
+type: article
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

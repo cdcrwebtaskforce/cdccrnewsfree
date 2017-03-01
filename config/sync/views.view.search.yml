@@ -82,6 +82,7 @@ display:
             'entity:node':
               landing_page: teaser
               page: teaser
+              article: default
       fields:
         rendered:
           table: search_api_index_content

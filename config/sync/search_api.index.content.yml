@@ -26,6 +26,7 @@ field_settings:
         'entity:node':
           landing_page: full
           page: default
+          article: default
   label:
     label: Label
     property_path: aggregated_field
@@ -64,9 +65,26 @@ datasource_settings:
       default: true
       selected: {  }
 processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
   content_access:
     weights:
       preprocess_query: -10
+  html_filter:
+    fields:
+      - rendered
+      - label
+    title: true
+    alt: true
+    tags:
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+      b: 2
+    weights:
+      preprocess_index: -10
+      preprocess_query: -9
   ignorecase:
     fields:
       - rendered
@@ -74,6 +92,7 @@ processor_settings:
     weights:
       preprocess_index: -9
       preprocess_query: -8
+  node_status: {  }
   rendered_item: {  }
   stopwords:
     fields:
@@ -118,14 +137,6 @@ processor_settings:
     weights:
       preprocess_index: -5
       preprocess_query: -4
-  aggregated_field: {  }
-  transliteration:
-    fields:
-      - rendered
-      - label
-    weights:
-      preprocess_index: -4
-      preprocess_query: -3
   tokenizer:
     fields:
       - rendered
@@ -136,23 +147,13 @@ processor_settings:
     weights:
       preprocess_index: -6
       preprocess_query: -5
-  html_filter:
+  transliteration:
     fields:
       - rendered
       - label
-    title: true
-    alt: true
-    tags:
-      h1: 5
-      h2: 3
-      h3: 2
-      strong: 2
-      b: 2
     weights:
-      preprocess_index: -10
-      preprocess_query: -9
-  add_url: {  }
-  node_status: {  }
+      preprocess_index: -4
+      preprocess_query: -3
 tracker_settings:
   default: {  }
 options:
