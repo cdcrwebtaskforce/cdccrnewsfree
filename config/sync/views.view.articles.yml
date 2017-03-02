@@ -142,23 +142,64 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
-      sorts:
         created:
           id: created
           table: node_field_data
           field: created
-          order: DESC
-          entity_type: node
-          entity_field: created
-          plugin_id: date
           relationship: none
           group_type: group
           admin_label: ''
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: '-14 days'
+            type: offset
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+      sorts:
+        sticky:
+          id: sticky
+          table: node_field_data
+          field: sticky
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
           exposed: false
           expose:
             label: ''
-          granularity: second
-      title: Articles
+          entity_type: node
+          entity_field: sticky
+          plugin_id: standard
+      title: 'Most Popular Articles'
       header: {  }
       footer: {  }
       empty: {  }
@@ -177,7 +218,7 @@ display:
   block_1:
     display_plugin: block
     id: block_1
-    display_title: Block
+    display_title: 'Most Popular'
     position: 3
     display_options:
       display_extenders: {  }
@@ -275,6 +316,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+      display_description: ''
     cache_metadata:
       max-age: -1
       contexts:
