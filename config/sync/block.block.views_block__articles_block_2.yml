@@ -1,32 +1,30 @@
-uuid: cda93322-be44-4428-9c61-52ca1bc5ecde
+uuid: ee77dd24-16b0-4b61-849c-e409c3a16c42
 langcode: en
 status: true
 dependencies:
   config:
     - views.view.articles
   module:
-    - node
+    - system
     - views
   theme:
     - bartik
-id: views_block__articles_block_1
+id: views_block__articles_block_2
 theme: bartik
 region: sidebar_second
 weight: 0
 provider: null
-plugin: 'views_block:articles-block_1'
+plugin: 'views_block:articles-block_2'
 settings:
-  id: 'views_block:articles-block_1'
+  id: 'views_block:articles-block_2'
   label: ''
   provider: views
   label_display: visible
   views_label: ''
   items_per_page: none
 visibility:
-  node_type:
-    id: node_type
-    bundles:
-      article: article
+  request_path:
+    id: request_path
+    pages: '/articles*'
     negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
+    context_mapping: {  }
