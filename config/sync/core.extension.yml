@@ -11,6 +11,7 @@ module:
   ctools_block: 0
   datetime: 0
   dblog: 0
+  devel: 0
   devel_generate: 0
   diff: 0
   editor: 0
@@ -28,7 +29,7 @@ module:
   history: 0
   image: 0
   inline_entity_form: 0
-  layout_plugin: 0
+  layout_discovery: 0
   lightning: 0
   lightning_contact_form: 0
   lightning_core: 0
@@ -41,6 +42,7 @@ module:
   lightning_media_twitter: 0
   lightning_media_video: 0
   lightning_page: 0
+  lightning_roles: 0
   lightning_search: 0
   lightning_workflow: 0
   link: 0
@@ -56,6 +58,7 @@ module:
   page_cache: 0
   page_manager: 0
   panelizer: 0
+  panelizer_quickedit: 0
   panels: 0
   panels_ipe: 0
   path: 0
@@ -89,3 +92,4 @@ theme:
   seven: 0
 _core:
   default_config_hash: m2GVq11UAOVuNgj8x0t5fMOPujpvQQ_zxLoaly1BMEU
+profile: lightning
