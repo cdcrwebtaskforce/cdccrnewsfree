@@ -35,11 +35,11 @@ class EntityBrowserTest extends EntityBrowserJavascriptTestBase {
     $this->getSession()->getPage()->checkField('entity_browser_select[file:' . $image->id() . ']');
     $this->getSession()->getPage()->pressButton('Select entities');
 
-    $this->assertSession()->pageTextContains('llama.jpg');
     // Switch back to the main page.
     $this->getSession()->switchToIFrame();
     $this->waitForAjaxToFinish();
     // Test the Edit functionality.
+    $this->assertSession()->pageTextContains('llama.jpg');
     $this->assertSession()->buttonExists('Edit');
     // @TODO Test the edit button.
     // Test the Delete functionality.
@@ -208,6 +208,62 @@ class EntityBrowserTest extends EntityBrowserJavascriptTestBase {
 
     // Check that the entity browser widget is closed.
     $this->assertSession()->buttonNotExists('Second submit button');
+  }
+
+  /**
+   * Tests the EntityBrowserWidgetContext argument_default views plugin.
+   */
+  public function testContextualFilter() {
+    $this->drupalCreateContentType(['type' => 'type_one', 'name' => 'Type One']);
+    $this->drupalCreateContentType(['type' => 'type_two', 'name' => 'Type Two']);
+    $this->drupalCreateContentType(['type' => 'type_three', 'name' => 'Type Three']);
+    $this->createNode(['type' => 'type_one', 'title' => 'Type one node']);
+    $this->createNode(['type' => 'type_two', 'title' => 'Type two node']);
+    $this->createNode(['type' => 'type_three', 'title' => 'Type three node']);
+
+    /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display */
+    $form_display = $this->container->get('entity_type.manager')
+      ->getStorage('entity_form_display')
+      ->load('node.article.default');
+
+    $form_display->setComponent('field_reference', [
+      'type' => 'entity_browser_entity_reference',
+      'settings' => [
+        'entity_browser' => 'test_contextual_filter',
+        'field_widget_display' => 'label',
+        'open' => TRUE,
+      ],
+    ])->save();
+
+    /** @var \Drupal\Core\Field\FieldConfigInterface $field_config */
+    $field_config = $this->container->get('entity_type.manager')
+      ->getStorage('field_config')
+      ->load('node.article.field_reference');
+    $handler_settings = $field_config->getSetting('handler_settings');
+    $handler_settings['target_bundles'] = [
+      'type_one' => 'type_one',
+      'type_three' => 'type_three',
+    ];
+    $field_config->setSetting('handler_settings', $handler_settings);
+    $field_config->save();
+
+    $account = $this->drupalCreateUser([
+      'access test_contextual_filter entity browser pages',
+      'create article content',
+      'access content',
+    ]);
+    $this->drupalLogin($account);
+
+    $this->drupalGet('node/add/article');
+
+    // Open the entity browser widget form.
+    $this->getSession()->getPage()->clickLink('Select entities');
+    $this->getSession()->switchToIFrame('entity_browser_iframe_test_contextual_filter');
+
+    // Check that only nodes of an allowed type are listed.
+    $this->assertSession()->pageTextContains('Type one node');
+    $this->assertSession()->pageTextNotContains('Type two node');
+    $this->assertSession()->pageTextContains('Type three node');
   }
 
 }
